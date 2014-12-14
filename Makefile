@@ -12,7 +12,7 @@ DISK_CACHE_ROOT = /var/cache/polipo
 # To compile with GCC:
 
 # CC = gcc
-CDEBUGFLAGS = -Os -g -Wall -fno-strict-aliasing
+CDEBUGFLAGS = -Os -Wall -fno-strict-aliasing -flto=3 -ffunction-sections -Wl,--gc-sections 
 
 # To compile on a pure POSIX system:
 
@@ -39,7 +39,12 @@ CDEBUGFLAGS = -Os -g -Wall -fno-strict-aliasing
 # LDLIBS = -lws2_32
 
 FILE_DEFINES = -DLOCAL_ROOT=\"$(LOCAL_ROOT)/\" \
-               -DDISK_CACHE_ROOT=\"$(DISK_CACHE_ROOT)/\"
+               -DDISK_CACHE_ROOT=\"$(DISK_CACHE_ROOT)/\" \
+							 -DNO_DISK_CACHE \
+							 -DNO_FANCY_RESOLVER \
+							 -DNO_FORBIDDEN \
+							 -DNO_REDIRECTOR \
+							 -DNO_SYSLOG
 
 # You may optionally also add any of the following to DEFINES:
 #
